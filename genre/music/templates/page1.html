@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <title>Music Genre</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'images/' %}" type="text/css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+      .button 
+      {
+        width: 100px;
+        height: 50;
+        font-size:14pt;
+      }
+      #textboxid
+      {
+          height:50px;
+          font-size:14pt;
+      }
+      * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        #container {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            background: #303030;
+        }
+
+        /* logo css */
+        #logo {
+            position: absolute;
+            top: 50px;
+            left: 5%;
+            font-size: 34px;
+            color: #ffffff;
+            font-weight: bolder;
+        }
+
+        /* navbar css */
+        #navbar {
+            height: 60px;
+            width: 925px;
+            position: absolute;
+            top: 50px;
+            right: 5%;
+            border-radius: 20px;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        #navbar ul {
+            height: 100%;
+            width: 965px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        #navbar ul li a {
+            height: 100%;
+            width: auto;
+            margin: 0 70px;
+            font-size: 25px;
+            margin-left: 0;
+            display: grid;
+            place-items: center;
+            padding: 0 20px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        #navbar ul li a:hover {
+            color: #01ce69;
+            border-bottom: 2px solid #01ce69;
+            width: calc(100% - 150px);
+        }
+
+        /* circle css*/
+        #circle {
+            height: 800px;
+            width: 800px;
+            border-radius: 50%;
+            background: #d4fbe715;
+            position: absolute;
+            left: 2%;
+            bottom: 9%;
+        }
+
+        /* side image css */
+        #sideImage {
+            position:absolute;
+            width:950px;
+            margin-left:-60px;
+            margin-top:-120px;
+
+        }
+
+        /* content css */
+        #content {
+            height: auto;
+            width: 700px;
+            position: absolute;
+            right: 11%;
+            top: calc(50% - 215px);
+        }
+
+        #content h1 {
+            font-size: 50px;
+            color: #01ce69;
+            margin-left:70px;
+            margin-bottom:50px;
+            
+        }
+
+        #content p {
+            font-size: 25px;
+            margin-bottom:10px;
+            font-weight: bold;
+            color:rgb(62, 62, 62);
+        }
+
+        #content button {
+            margin-top:40px;
+            height: 60px;
+            width: 150px;
+            border: none;
+            outline: none;
+            border-radius: 70px;
+            /* margin: 20px 0; */
+            font-size: 20px;
+            background: #01ce69;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #content button:hover {
+            color: #01ce69;
+            border: 2px solid #01ce69;
+            background: transparent;
+        }
+
+        /* social media accounts Links */
+        #socialLinks {
+            position: absolute;
+            bottom: 5%;
+            right: 2%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #socialLinks a {
+            text-decoration: none;
+            margin: 12px 0;
+        }
+
+        #socialLinks a i {
+            height: 50px;
+            width: 50px;
+            margin: 0 20px;
+            font-size: 20px;
+            color: #dce8f7;
+            background: #01ce69;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+        }
+
+        #socialLinks a i:hover {
+            background: transparent;
+            color: #01ce69;
+            border: 2px solid #01ce69;
+        }
+
+        /* animated music icon */
+        #music {
+            background: #01ce69;
+            height: 90px;
+            width: 90px;
+            position: absolute;
+            bottom: 0px;
+            right: 20%;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 30px;
+            border: 2px solid #01ce69;
+            /* linked animation */
+            animation: animate 6s ease-in-out infinite;
+        }
+
+        /* animatin for music icon */
+        @keyframes animate {
+            0%,100% {
+                background: #01ce69;
+                color: #fff;
+                right: 20%;
+            }
+
+            50% {
+                background: #01ce6900;
+                color: #01ce69;
+                right: 25%;
+            }
+        }
+        
+    </style>
+    <script type='text/javascript'>document.addEventListener('DOMContentLoaded', function () {window.setTimeout(document.querySelector('svg').classList.add('animated'),1000);})</script>
+  </head>
+  <body>
+    <!-- <center><img src="{% static '1.png' %}"> -->
+      <div id="container">
+        <!-- logo -->
+        <div id="logo">MUSIC</div>
+        <!-- navbar -->
+        
+        <!-- circle -->
+        <div id="circle"></div>
+        <!-- side image -->
+        <div id="sideImage">
+            <img src="{% static 'Headphone-bro.svg' %}" alt=""> 
+        </div>
+        <!-- main content -->
+        <div id="content">
+          <h1 style="color:#01ce69;">Music Genre Identification</h1>
+    
+          <form method="POST" action="{% url 'detect' %}"> {% csrf_token %}
+            <table style="border-collapse: collapse; margin-left: 185px; width: 72%; font-size:x-large;"> 
+              <tr>
+                <td><p style="color:white">Enter the file path</p></td>
+              </tr>
+              <tr>
+                <td><input id="textboxid" type="text" name="filepath" size="50"></td>
+              </tr>
+              <tr style="margin-top: 100px;">
+                <td><button class="button" onclick="location.href='{% url 'detect' %}'"> SUBMIT </button></td>
+              </tr>
+              <tr style="margin-top: 120px;">
+                <td><p style="margin-top:50px;color:rgb(255, 255, 255);font-size:20px;font-weight: 400;">{{rs}} {{result}}</p></td>
+              </tr>
+            </table>
+          </form> 
+        </div>
+        <!-- social links -->
+        <!-- visit fontawesome.com for icons -->
+        <div id="socialLinks">
+            <!-- facebook -->
+            <a href="">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <!-- instagram -->
+            <a href="">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <!-- youtube -->
+            <a href="">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+        <!-- animated music icon -->
+        <div id="music">
+            <!-- music -->
+            <i class="fas fa-music"></i>
+        </div>
+        <!-- container end -->
+    </div>
+
+  </body>
+</html>
+
+
+
+

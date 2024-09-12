@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrument Prediction</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+    body, h1, p, button, label {
+            color: black;
+        }
+        body {
+            background: url('https://img.freepik.com/free-photo/beautifully-illustrate-musical-instrument_23-2151103366.jpg?t=st=1708947451~exp=1708951051~hmac=35be93c631291f9425e050970532e392c559f34ff4702a31b4773eaf7fc84d0a&w=740'); /* Adjust the path based on your background image */
+            background-size: cover;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+         .custom-file {
+            width: 50%; /* Adjust the width as needed */
+            margin: 0 auto; /* Center the file input */
+        }
+
+        .custom-file-input {
+            color: transparent;
+        }
+
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+
+        .custom-file-input::before {
+            content: 'Choose an audio file';
+            color: white;
+            display: inline-block;
+            background: linear-gradient(to right, #4285f4, #34a853, #fbbc05, #ea4335);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px 12px;
+            outline: none;
+            white-space: nowrap;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .custom-file-input:hover::before {
+            border-color: black;
+        }
+
+        .custom-file-input:active::before {
+            background: linear-gradient(to right, #4285f4, #34a853, #fbbc05, #ea4335);
+        }
+    </style>
+</head>
+<body><br>
+    <h1><b>Music Scale Identification</b></h1><br><br><br>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+        <div class="custom-file mb-3">
+            <input type="file" class="custom-file-input" id="audio" name="file" accept=".mp3">
+            <label class="custom-file-label" for="audio">Choose an audio file</label>
+        </div><br><br>
+        <button type="submit" class="btn btn-primary">Predict Scale</button>
+    </form>
+<br><br>
+    {% if chord %}
+        <p>The identified chord for the song {{ filename }} is: <strong style="font-size: 24px;">{{ chord }}</strong></p>
+    {% endif %}
+</body>
+</html>
